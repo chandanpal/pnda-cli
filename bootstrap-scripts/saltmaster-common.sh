@@ -45,6 +45,14 @@ reactor:
     - salt://reactor/delete_bastion_host_entry.sls
   - 'fqdn/updated/jupyter':
     - salt://reactor/fqdn_update.sls
+  - 'salt/beacon/*/service_opentsdb/service/opentsdb/status/stop/HBaseUp':
+    - salt://reactor/service_opentsdb_entry.sls
+  - 'salt/beacon/*/hadoop_service/service/hadoop/status/stopped':
+    - salt://reactor/service_hadoop_start_entry.sls
+  - 'salt/beacon/*/hadoop_service/service/hadoop/addon/status/stopped':
+    - salt://reactor/service_hadoop_addon_start_entry.sls
+
+
 ## end of specific PNDA saltmaster config
 file_recv: True
 
