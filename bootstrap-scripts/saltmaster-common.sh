@@ -45,6 +45,14 @@ reactor:
     - salt://reactor/delete_bastion_host_entry.sls
   - 'fqdn/updated/jupyter':
     - salt://reactor/fqdn_update.sls
+  - 'salt/beacon/*/service_opentsdb/service/opentsdb/status/stop/HBaseUp':
+    - salt://reactor/service_opentsdb_entry.sls
+  - 'salt/beacon/*/hadoop_service/service/hadoop/status/stopped':
+    - salt://reactor/service_hadoop_start_entry.sls
+  - 'salt/beacon/*/hadoop_service/service/hadoop/addon/status/stopped':
+    - salt://reactor/service_hadoop_addon_start_entry.sls
+
+
 ## end of specific PNDA saltmaster config
 file_recv: True
 
@@ -144,6 +152,7 @@ packages_server:
 hdp:
   hdp_core_stack_repo: '$PNDA_MIRROR/mirror_hdp/HDP/$HDP_OS/2.6.4.0-91/'
   hdp_utils_stack_repo: '$PNDA_MIRROR/mirror_hdp/HDP-UTILS-1.1.0.22/repos/$HDP_OS/'
+  oozie_spark_version: '$OOZIE_SPARK_VERSION'
 
 mine_functions:
   network.ip_addrs: [$PNDA_INTERNAL_NETWORK]
